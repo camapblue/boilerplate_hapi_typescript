@@ -1,0 +1,9 @@
+node_modules
+dist/**
+coverage
+data
+.DS_Store
+.scannerwork*
+package.json-e
+.env
+.clinic

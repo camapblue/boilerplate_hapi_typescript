@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  backend:
+    image: backend:1
+    ports:
+      - 8000:8000
+    networks:
+      - default
+      - app-network
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=Init123456
+    networks:
+      - default
+      - app-network
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - default
+      - app-network
+    restart: always
+volumes:
+  mongodb:
+    external: true
+  mailhog:
+    external: true
+networks:
+  app-network:
+    external: true
